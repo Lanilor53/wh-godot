@@ -24,6 +24,7 @@ func _process(delta):
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
+    
 		move_and_slide(velocity)
 	
 
