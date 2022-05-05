@@ -6,7 +6,8 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="KinematicBody2D"]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -20,3 +21,6 @@ shape = SubResource( 1 )
 [node name="Rapier" parent="." instance=ExtResource( 3 )]
 position = Vector2( 12.9706, -14.1461 )
 scale = Vector2( 0.3, 0.4 )
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+current = true
