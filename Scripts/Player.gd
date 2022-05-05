@@ -27,6 +27,7 @@ func _process(delta):
 	
 	position += velocity * delta
 	
+	look_at(get_global_mouse_position())
 
 	
 
