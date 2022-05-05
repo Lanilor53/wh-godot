@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 var player
 var SPEED = 300
@@ -14,4 +14,4 @@ func _process(delta):
 		var velocity = self.position.direction_to(player.position)
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * SPEED
-		self.position += velocity * delta
+		move_and_slide(velocity)
