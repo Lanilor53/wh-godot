@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 export var speed = 400
 var screen_size
