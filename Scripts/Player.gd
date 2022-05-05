@@ -24,11 +24,8 @@ func _process(delta):
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-	
-	position += velocity * delta
-	
-	look_at(get_global_mouse_position())
-
+    
+		move_and_slide(velocity)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
