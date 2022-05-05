@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Textures/Rapier.png" type="Texture" id=1]
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.20579
+height = 221.803
+
+[node name="Rapier" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.44545, -1.33635 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+position = Vector2( -0.0856171, -0.440231 )
+rotation = -1.5708
+scale = Vector2( 0.615541, 0.313124 )
+texture = ExtResource( 1 )
