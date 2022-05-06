@@ -13,6 +13,9 @@ func _ready():
 func _process(delta):
 	if current_invincibility_time > 0:
 		current_invincibility_time -= delta
+	
+	look_at(get_global_mouse_position())
+	
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
 		 velocity.x += 1
