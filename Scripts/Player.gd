@@ -9,6 +9,7 @@ export var MAX_INVINCIBILITY_TIME = 1
 onready var current_invincibility_time = 0
 
 export var MAX_ATTACK_COOLDOWN = 1
+export var ATTACK_CHARGE_SPEED = 2
 onready var current_attack_cooldown = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +22,7 @@ func _process(delta):
 		current_invincibility_time -= delta
 		
 	if current_attack_cooldown >= 0:
-		current_attack_cooldown -= delta
+		current_attack_cooldown -= delta*ATTACK_CHARGE_SPEED
 		emit_signal("attack_charge_changed", current_attack_cooldown)
 	look_at(get_global_mouse_position())
 	
