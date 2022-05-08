@@ -8,6 +8,7 @@ onready var current_invincibility_time = 0
 
 export var MAX_ATTACK_COOLDOWN = 1
 onready var current_attack_cooldown = 0
+var flag
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,10 +18,13 @@ func _ready():
 func _process(delta):
 	if current_invincibility_time > 0:
 		current_invincibility_time -= delta
-	
-	if current_attack_cooldown > 0:
+		
+	if current_attack_cooldown >= 0:
+		flag = true
 		current_attack_cooldown -= delta
-	
+	if current_attack_cooldown <= 0 and flag==true:
+		print("attack up")
+		flag = false
 	look_at(get_global_mouse_position())
 	
 	var velocity = Vector2.ZERO # The player's movement vector.
@@ -40,11 +44,11 @@ func _process(delta):
 	
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == true:
-		# play attack animation
-		$Weapon.get_node("AnimationPlayer").play("attack")
-
-		# start attack cooldown
-		current_attack_cooldown = MAX_ATTACK_COOLDOWN
+		if current_attack_cooldown <= 0:
+			# play attack animation
+			$Weapon.get_node("AnimationPlayer").play("attack")
+			# start attack cooldown
+			current_attack_cooldown = MAX_ATTACK_COOLDOWN
 
 func on_damage(damage):
 	if current_invincibility_time <= 0:
