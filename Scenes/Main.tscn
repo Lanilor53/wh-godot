@@ -6,12 +6,16 @@ script/source = "extends Node2D
 func load_level():
 	var player_scene = load(\"res://Scenes/Player.tscn\")
 	var level_scene = load(\"res://Scenes/Level1.tscn\")
+	var hud_scene = load(\"res://Scenes/HUD.tscn\")
 	
 	var player_instance = player_scene.instance()
 	var level_instance = level_scene.instance()
+	var hud_instance = hud_scene.instance()
 	
 	self.add_child(player_instance)
 	self.add_child(level_instance)
+	self.add_child(hud_instance)
+	
 
 
 func _ready():
