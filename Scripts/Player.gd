@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-signal attack_charge_changed
-
 export var SPEED = 400
 export var ROTATION_SPEED = 20
 export var REACH_ROTATION_SPEED = 3.5
@@ -10,10 +8,6 @@ var screen_size
 onready var health = 100
 export var MAX_INVINCIBILITY_TIME = 1
 onready var current_invincibility_time = 0
-
-export var MAX_ATTACK_COOLDOWN = 1
-export var ATTACK_CHARGE_SPEED = 2
-onready var current_attack_cooldown = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,11 +24,6 @@ func _physics_process(delta):
 func _process(delta):
 	if current_invincibility_time > 0:
 		current_invincibility_time -= delta
-		
-	if current_attack_cooldown >= 0:
-		current_attack_cooldown -= delta*ATTACK_CHARGE_SPEED
-		emit_signal("attack_charge_changed", current_attack_cooldown)
-		
 	
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
