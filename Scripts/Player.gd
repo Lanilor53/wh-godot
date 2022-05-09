@@ -3,6 +3,9 @@ extends KinematicBody2D
 signal attack_charge_changed
 
 export var SPEED = 400
+export var ROTATION_SPEED = 20
+export var REACH_ROTATION_SPEED = 3.5
+onready var look_point = get_global_mouse_position()
 var screen_size
 onready var health = 100
 export var MAX_INVINCIBILITY_TIME = 1
@@ -17,6 +20,13 @@ func _ready():
 	set_meta("damageable", true)
 	set_meta("faction", "player")
 
+func _physics_process(delta):
+	if $Weapon.is_reach:
+		look_point = look_point.linear_interpolate(get_global_mouse_position(), delta*REACH_ROTATION_SPEED)
+	else:
+		look_point = look_point.linear_interpolate(get_global_mouse_position(), delta*ROTATION_SPEED)
+	look_at(look_point)
+
 func _process(delta):
 	if current_invincibility_time > 0:
 		current_invincibility_time -= delta
@@ -24,7 +34,7 @@ func _process(delta):
 	if current_attack_cooldown >= 0:
 		current_attack_cooldown -= delta*ATTACK_CHARGE_SPEED
 		emit_signal("attack_charge_changed", current_attack_cooldown)
-	look_at(get_global_mouse_position())
+		
 	
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
@@ -42,12 +52,13 @@ func _process(delta):
 		move_and_slide(velocity)
 	
 func _unhandled_input(event):
-	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == true:
-		if current_attack_cooldown <= 0:
-			# play attack animation
-			$Weapon.get_node("AnimationPlayer").play("attack")
-			# start attack cooldown
-			current_attack_cooldown = MAX_ATTACK_COOLDOWN
+	if event is InputEventMouseButton and event.button_index == 1:
+		if event.pressed == true:
+				# reach with weapon
+				$Weapon.get_node("AnimationPlayer").play("reach")
+		elif event.pressed == false:
+				# hold weapon close
+				$Weapon.get_node("AnimationPlayer").play("hold")
 
 func on_damage(damage):
 	if current_invincibility_time <= 0:
@@ -57,6 +68,3 @@ func on_damage(damage):
 			queue_free() # die
 		current_invincibility_time = MAX_INVINCIBILITY_TIME
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
