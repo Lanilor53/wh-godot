@@ -19,7 +19,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Weapon" parent="." instance=ExtResource( 3 )]
-position = Vector2( 22, -15 )
+position = Vector2( 22, 13 )
 scale = Vector2( 0.3, 0.4 )
 z_index = -1
 

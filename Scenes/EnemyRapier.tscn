@@ -64,7 +64,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[node name="Rapier" type="Area2D"]
+[node name="EnemyRapier" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

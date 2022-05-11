@@ -38,7 +38,6 @@ func _process(delta):
 		current_dash_cooldown -= delta
 	if current_dash_frames > 0:
 		current_dash_frames -= 1
-		print("dashing: %s" % velocity)
 		move_and_slide(velocity*DASH_SPEED)
 	else:
 		velocity = Vector2.ZERO # The player's movement vector.

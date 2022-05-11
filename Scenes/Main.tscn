@@ -3,9 +3,10 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+
 func load_level():
 	var player_scene = load(\"res://Scenes/Player.tscn\")
-	var level_scene = load(\"res://Scenes/Level1.tscn\")
+	var level_scene = load(\"res://Scenes/LevelTest.tscn\")
 	
 	var player_instance = player_scene.instance()
 	var level_instance = level_scene.instance()
@@ -16,6 +17,11 @@ func load_level():
 
 
 func _ready():
+	load_level()
+
+func restart():
+	for child in get_children():
+		child.queue_free()
 	load_level()
 "
 

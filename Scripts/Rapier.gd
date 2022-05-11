@@ -15,8 +15,10 @@ func _physics_process(delta):
 func _on_Rapier_body_entered(body):
 	# only damage when in reach state
 	if is_reach:
-		if body.has_meta("faction") and body.get_meta("faction") == "enemy":
-			if body.has_meta("damageable") and body.get_meta("damageable") == true:
-				var total_speed = (abs(current_speed.x) + abs(current_speed.y))
-				print("dealing damage, total speed: %s, total dmg: %s" % [total_speed, BASE_DAMAGE*total_speed])
-				body.on_damage(BASE_DAMAGE*total_speed)
+		if body.has_meta("faction"):
+			# todo: do not check faction?
+			if get_parent().get_meta("faction") != body.get_meta("faction"):
+				if body.has_meta("damageable") and body.get_meta("damageable") == true:
+					var total_speed = (abs(current_speed.x) + abs(current_speed.y))
+					print("dealing damage, total speed: %s, total dmg: %s" % [total_speed, BASE_DAMAGE*total_speed])
+					body.on_damage(BASE_DAMAGE*total_speed)
